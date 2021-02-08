@@ -20,7 +20,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name="Address")
-@Data @NoArgsConstructor @EqualsAndHashCode(exclude= {"owners"}) @ToString(exclude= {"owners"})
+@Data @NoArgsConstructor
 @AllArgsConstructor
 public class Address implements Serializable{
 
@@ -35,7 +35,4 @@ public class Address implements Serializable{
     private String city;
     private String state;
     private Integer zipcode;
-    
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy="addresses")
-    private Set<User> owners;
 }

@@ -30,14 +30,11 @@ public class BankingAppSpringChristopherCastrillonApplication extends SpringBean
 		UserRepository userDAO = context.getBean(UserRepository.class);
 		ApplicationRepository appDAO = context.getBean(ApplicationRepository.class);
 		AccountRepository accountDAO = context.getBean(AccountRepository.class);
-		
-		
-		
 		Application testApplication = new Application(0, AccountType.Checking, 100000.00, "Software Engineer", null );
 		User testUser1 = new User(0,Role.User,"Christopher", "Castrillon", 111111111, "cc3988", "password", "ccastrillon@bankingApp.com", null, null, testApplication);
 		Set<User> testUser1AddressUsersList = new HashSet<>();
 		testUser1AddressUsersList.add(testUser1);
-		Address testUserAddress = new Address(0, "14 Loraine Street", "Brentwood", "New York", 11717, testUser1AddressUsersList);
+		Address testUserAddress = new Address(0, "14 Loraine Street", "Brentwood", "New York", 11717);
 		Set<Address> testUser1AddressList = new HashSet<>();
 		testUser1AddressList.add(testUserAddress);
 		testUser1.setAddresses(testUser1AddressList);
@@ -47,9 +44,13 @@ public class BankingAppSpringChristopherCastrillonApplication extends SpringBean
 		appDAO.save(testApplication);
 		testUser1.setUserId(1);
 		Account testAccount = new Account(0, AccountType.Checking, 10000.00,testUser1 );
+		Account testSavingsAccount = new Account(0, AccountType.Savings, 100000.00, testUser1);
 		accountDAO.save(testAccount);
-		System.out.println("ok");
-		System.out.println("Annother commit");
+		accountDAO.save(testSavingsAccount);
+		User u = userDAO.findByUsername("cc3988");
+		System.out.println(u.toString());
+		User testFinanceManager = new User(0, Role.FinanceManager, "testFinanceManagerFN","testFinanceManagerLN",000000000, "testFinanceManagerUsername", "testFinanceManagerPassword", "fmanager1@bankingApp.com", testUser1AddressList );
+		userDAO.save(testFinanceManager);
     }
 
 }

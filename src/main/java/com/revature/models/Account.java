@@ -12,13 +12,17 @@ import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name ="user_account")
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor @EqualsAndHashCode(exclude= {"accountOwner"}) @ToString(exclude= {"accountOwner"})
 public class Account implements Serializable{
 
     /**
@@ -32,6 +36,8 @@ public class Account implements Serializable{
     @NotNull
     private AccountType accountType;
     private double balance;
+    
+    @Getter(AccessLevel.NONE)
     @ManyToOne
     @JoinColumn(name="userId", nullable=false)
     private User accountOwner;

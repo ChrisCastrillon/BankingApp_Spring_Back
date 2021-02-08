@@ -14,6 +14,6 @@ import lombok.NoArgsConstructor;
 
 public enum AccountType{
     
-    Checking, Saving
+    Checking, Savings
     
 }

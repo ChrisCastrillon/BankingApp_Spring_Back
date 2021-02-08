@@ -13,24 +13,19 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.sun.istack.NotNull;
+import com.sun.istack.internal.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name="banking_users")
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor  @EqualsAndHashCode(exclude= {"addresses", "accounts"}) @ToString(exclude= {"addresses","accounts"})
 public class User implements Serializable {
-    
-   
 
-    
-
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1L;
     
     @Id
@@ -51,11 +46,20 @@ public class User implements Serializable {
     private String email;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Address> addresses;
-    
     @OneToMany(mappedBy="accountOwner")
     private Set<Account> accounts;
-   
     private Application application;
+    
+    public User(int id, Role role, String firstname, String lastname, Integer ssn, String username, String password, String email, Set<Address> addresses) {
+        this.userId = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.ssn = ssn;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.addresses = addresses;
+    }
     
     
 

@@ -10,9 +10,11 @@ import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -34,7 +36,7 @@ public class Application implements Serializable{
     private double income;
     @NotNull
     private String jobTitle;
-
+    @Getter(AccessLevel.NONE)
     private User applicationOwner;
 
 }
