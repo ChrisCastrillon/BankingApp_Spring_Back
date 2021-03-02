@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.User;
 import com.revature.services.IUserService;
+import com.revature.templates.CreateUserFormTemplate;
 import com.revature.templates.LoginFormTemplate;
 
 @CrossOrigin(origins="*")
@@ -30,5 +31,15 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(u);
+    }
+    @PostMapping("/register")
+    @ResponseBody
+    public ResponseEntity<User> createUser(@RequestBody CreateUserFormTemplate cuft) {
+       User u = userService.addNewUser(cuft);
+       if(u == null) {
+           return ResponseEntity.status(500).build();
+       }
+       return ResponseEntity.ok(u);
+        
     }
 }

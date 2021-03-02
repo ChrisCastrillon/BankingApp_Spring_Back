@@ -31,7 +31,7 @@ public class Account implements Serializable{
     private static final long serialVersionUID = -4698619226853715509L;
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer accountNumber;
+    private int accountNumber;
     
     @NotNull
     private AccountType accountType;

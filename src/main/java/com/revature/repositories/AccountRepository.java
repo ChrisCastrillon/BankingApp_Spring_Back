@@ -15,4 +15,7 @@ import com.revature.models.Account;
 public interface AccountRepository extends JpaRepository<Account, Integer>{
     @Query(value="SELECT * FROM banking_app_spring.user_account WHERE user_id = :userId", nativeQuery = true)
     public List<Account> findAllByUserId(@Param("userId") int userId);
+    
+    public Account findByAccountNumber(int accountNumber);
+
 }

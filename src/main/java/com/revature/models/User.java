@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.internal.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -36,7 +37,6 @@ public class User implements Serializable {
     private String firstname;
     @NotNull
     private String lastname;
-    @NotNull
     private Integer ssn;
     @NotNull
     private String username;
@@ -48,7 +48,10 @@ public class User implements Serializable {
     private Set<Address> addresses;
     @OneToMany(mappedBy="accountOwner")
     private Set<Account> accounts;
-    private Application application;
+    
+    @JsonManagedReference
+    @OneToMany
+    private Set<Application> application;
     
     public User(int id, Role role, String firstname, String lastname, Integer ssn, String username, String password, String email, Set<Address> addresses) {
         this.userId = id;
@@ -60,7 +63,9 @@ public class User implements Serializable {
         this.email = email;
         this.addresses = addresses;
     }
-    
-    
+    public Application addApplication(Application app) {
+        this.application.add(app);
+        return app;
+    }
 
 }
